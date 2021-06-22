@@ -4,6 +4,7 @@
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
+<!-- <link rel="stylesheet" href="/static/assets/js/simc/bootstrap.min.css"> -->
 {% endblock stylesheets %}
 
 {% block content %}
@@ -513,7 +514,7 @@
                 headers: {'X-CSRFToken': getCookie('csrftoken')},
                 url: 'http://127.0.0.1:8000/api/battle/',
                 type: 'POST',
-                data: jsondata,
+                data: {data:jsondata},
                 dataType: 'json',
                 success: function (data) {
                     if (data.code == 200 && data.total > 0) {
