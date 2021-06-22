@@ -2,14 +2,6 @@
 # 战斗流程的最小单位
 # behavior类下的所有子方法命名采用驼峰命名，方便策划配置
 
-import sys
-import os
-import django
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'simseal.settings'
-django.setup()
-
 from apps.simc.models import Monster, Character
 from apps.simc.data.unit import MainUnit
 from apps.simc.battle.preprocess import preprocess

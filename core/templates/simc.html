@@ -456,7 +456,7 @@
         });
 
         function getCharacter() {
-            $.get('http://furioso.fun/api/character/', function (data) {
+            $.get('http://127.0.0.1:8000/api/character/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = '';
@@ -474,7 +474,7 @@
         }
 
         function getMonster() {
-            $.get('http://furioso.fun/api/monster/', function (data) {
+            $.get('http://127.0.0.1:8000/api/monster/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = '';
@@ -492,7 +492,7 @@
         }
 
         function getCards() {
-            $.get('http://furioso.fun/api/card/', function (data) {
+            $.get('http://127.0.0.1:8000/api/card/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = '';
@@ -511,7 +511,7 @@
         function postFight(jsondata) {
             $.ajax({
                 headers: {'X-CSRFToken': getCookie('csrftoken')},
-                url: 'http://furioso.fun/api/battle/',
+                url: 'http://127.0.0.1:8000/api/battle/',
                 type: 'POST',
                 data: jsondata,
                 dataType: 'json',
@@ -525,7 +525,7 @@
 
                 }
             })
-            // $.post('http://furioso.fun/api/battle/',jsondata,function(data){
+            // $.post('http://127.0.0.1:8000/api/battle/',jsondata,function(data){
             // 	if(data.code==200&&data.total>0){
             // 		var cont=data.data;
             // 		$("#home").html(cont.replaceAll('\n','<br>'));
@@ -534,7 +534,7 @@
         }
 
         function getOldF() {
-            $.get('http://furioso.fun/api/combat/', function (data) {
+            $.get('http://127.0.0.1:8000/api/combat/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = ''
@@ -548,7 +548,7 @@
         }
 
         function checkName(name) {
-            $.get('http://furioso.fun/api/combat_check/', {name: name}, function (data) {
+            $.get('http://127.0.0.1:8000/api/combat_check/', {name: name}, function (data) {
                 if (data.code == '200') {
                     if (data.data == true) {
                         alert('该战斗已存在，继续提交将覆盖原有数据')

@@ -9,7 +9,12 @@ from unipath import Path
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).parent
+from pathlib import Path
+import os
+import sys
+# 设置apps路径
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -24,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,6 +118,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_URL = '/static/'
+if DEBUG:
+    STATICFILES_DIRS = [str(BASE_DIR / 'static'), ]
+else:
+    STATIC_ROOT = str(BASE_DIR / 'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
+
 #############################################################
 # SRC: https://devcenter.heroku.com/articles/django-assets
 
@@ -130,3 +146,54 @@ STATICFILES_DIRS = (
 X_FRAME_OPTIONS = 'ALLOWALL'
 
 XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
+
+# simleui configs
+SIMPLEUI_CONFIG = {
+    'system_keep': False,
+    'dynamic': True,
+    'menus': [{
+        'name': 'QUICK SIM',
+        'icon': 'fab fa-simplybuilt',
+        'url': '/static/frontend/index.html'
+    }, {
+        'app': 'auth',
+        'name': 'AUTH',
+        'icon': 'fas fa-user-shield',
+        'models': [{
+            'name': 'USER',
+            'icon': 'fa fa-user',
+            'url': 'auth/user/'
+        },
+            {
+                'name': 'GROUP',
+                'icon': 'fa fa-users',
+                'url': 'auth/group'
+            }]
+    }, {
+        # 'app': 'apps.',
+        'name': 'SETTINGS',
+        'icon': 'fa fa-cogs',
+        'models': [{
+            'name': 'MONSTERS',
+            'icon': "fab fa-optin-monster",
+            'url': 'simc/monster/'
+        }, {
+            'name': 'CARDS',
+            'icon': "fas fa-money-bill",
+            'url': 'simc/card/'
+        }, {
+            'name': 'CHARACTER',
+            'icon': 'fas fa-hamsa',
+            'url': 'simc/character/'
+        }, {
+            'name': 'DUNGEON',
+            'icon': 'fas fa-dungeon',
+            'url': 'simc/battlefield'
+        }]
+
+    }]
+}
+
+SIMPLEUI_HOME_INFO = False
+
+SIMPLEUI_LOGO = 'https://miro.com/api/v1/accounts/3074457358670303205/picture?etag=R3074457346012449852_1&size=140'

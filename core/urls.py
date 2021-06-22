@@ -14,27 +14,22 @@ from django.views.generic import RedirectView
 from apps.simc.views import CharacterView, CardView, MonsterView, BattleView, BattleSimc, BattleIsExist
 
 urlpatterns = [
-    path('admin/', admin.site.urls),          # Django admin route
-    path("", include("authentication.urls")), # Auth routes - login / register
-    path("", include("app.urls"))             # UI Kits Html files
+    path('admin/', admin.site.urls),  # Django admin route
+    path("api/", include("apps.core.urls")),  # UI Kits Html files
+    path("", include("authentication.urls")),  # Auth routes - login / register
+    path("", include("app.urls")),  # UI Kits Html files
 ]
 
 urlpatterns += [
-                  path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-                  # path('api-token-auth/', views.obtain_auth_token),
-                  path('api/character/', CharacterView.as_view()),
-                  path('api/card/', CardView.as_view()),
-                  path('api/monster/', MonsterView.as_view()),
-                  path('api/battle/', BattleSimc.as_view()),
-                  path('api/combat/', BattleView.as_view()),
-                  path('api/combat_check/', BattleIsExist.as_view()),
-                  url(r'^favicon\.ico$', RedirectView.as_view(
-                      url='/core/static/images/favicon.ico'))]
-              # ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                   # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+                   # path('api-token-auth/', views.obtain_auth_token),
+                   url(r'^favicon\.ico$', RedirectView.as_view(
+                       url='/core/static/images/favicon.ico'))
+               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# if settings.DEBUG:
-#     urlpatterns += [
-#         re_path(r'^media/(?P<path>.*)$', serve, {
-#             'document_root': settings.MEDIA_ROOT
-#         }),
-#     ]
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT
+        }),
+    ]

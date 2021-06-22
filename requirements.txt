@@ -1,6 +1,7 @@
+-i https://pypi.douban.com/simple
 asgiref
 autopep8
-django==2.2.10
+django
 pycodestyle
 pytz
 sqlparse
@@ -9,3 +10,7 @@ dj-database-url
 python-decouple
 gunicorn
 whitenoise
+djangorestframework
+django-simpleui
+django-import_export
+Pillow
