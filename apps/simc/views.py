@@ -78,7 +78,7 @@ class BattleSimc(APIView):
 
     def post(self, request):
         editor = self.request.user
-        received_json_data = json.loads(list(dict(request.data).keys())[0])
+        received_json_data = json.loads(dict(request.data).get('data')[0])
         keys = ["name", "monsters", "character", "cards"]
         battle_data = {key: received_json_data.get(key) for key in keys}
         BattleField.objects.update_or_create(name=received_json_data.get('name'),

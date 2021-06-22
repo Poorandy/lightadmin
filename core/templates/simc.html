@@ -457,7 +457,7 @@
         });
 
         function getCharacter() {
-            $.get('http://127.0.0.1:8000/api/character/', function (data) {
+            $.get('/api/character/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = '';
@@ -475,7 +475,7 @@
         }
 
         function getMonster() {
-            $.get('http://127.0.0.1:8000/api/monster/', function (data) {
+            $.get('/api/monster/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = '';
@@ -493,7 +493,7 @@
         }
 
         function getCards() {
-            $.get('http://127.0.0.1:8000/api/card/', function (data) {
+            $.get('/api/card/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = '';
@@ -512,7 +512,7 @@
         function postFight(jsondata) {
             $.ajax({
                 headers: {'X-CSRFToken': getCookie('csrftoken')},
-                url: 'http://127.0.0.1:8000/api/battle/',
+                url: '/api/battle/',
                 type: 'POST',
                 data: {data:jsondata},
                 dataType: 'json',
@@ -535,7 +535,7 @@
         }
 
         function getOldF() {
-            $.get('http://127.0.0.1:8000/api/combat/', function (data) {
+            $.get('/api/combat/', function (data) {
                 if (data.code == '200' && data.total > 0) {
                     var contArr = data.data;
                     var list = ''
@@ -549,7 +549,7 @@
         }
 
         function checkName(name) {
-            $.get('http://127.0.0.1:8000/api/combat_check/', {name: name}, function (data) {
+            $.get('/api/combat_check/', {name: name}, function (data) {
                 if (data.code == '200') {
                     if (data.data == true) {
                         alert('该战斗已存在，继续提交将覆盖原有数据')
