@@ -53,10 +53,10 @@ class BattleField(models.Model):
     editor = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="编辑人", null=True, blank=True, default=None)
     combat_log = models.TextField(verbose_name="战斗日志", blank=True)
-    monster = models.TextField(verbose_name="战斗日志", blank=True)
-    character = models.TextField(verbose_name="战斗日志", blank=True)
-    card = models.TextField(verbose_name="战斗日志", blank=True)
-    loop = models.TextField(verbose_name="战斗日志", blank=True)
+    monster = models.TextField(verbose_name="怪物列表", blank=True)
+    character = models.TextField(verbose_name="角色", blank=True)
+    card = models.TextField(verbose_name="卡牌列表", blank=True)
+    loop = models.TextField(verbose_name="模拟次数", blank=True)
     update_time = models.DateTimeField(
         verbose_name="更新时间", auto_now=True)
     create_time = models.DateTimeField(
