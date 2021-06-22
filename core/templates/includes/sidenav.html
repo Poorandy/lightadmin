@@ -47,25 +47,18 @@
               <span class="nav-link-text">Quick Simc</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login.html">
-              <i class="ni ni-key-25 text-info"></i>
-              <span class="nav-link-text">Login (template)</span>
+            <li class="nav-item">
+            <a class="nav-link {% if 'admin' in segment %} active {% endif %}" href="/admin/">
+              <i class="ni ni-settings text-danger"></i>
+              <span class="nav-link-text">Admin</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/register.html">
-              <i class="ni ni-circle-08 text-pink"></i>
-              <span class="nav-link-text">Register (template)</span>
-            </a>
-          </li>
-
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">
               <i class="ni ni-user-run text-red"></i>
               <span class="nav-link-text">Logout</span>
             </a>
-          </li>            
+          </li>
         </ul>
         <!-- Divider -->
         <hr class="my-3">
