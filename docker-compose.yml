@@ -16,16 +16,13 @@ services:
       - web_network
       - db_network
   db:
-    image: mysql:5.7
+    image: postgres:12.0-alpine
     volumes:
-      - "./mysql:/var/lib/mysql"
-    ports:
-      - "3306:3306"
-    restart: always
-    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--skip-character-set-client-handshake','--default-time-zone=+8:00']
+      - postgres_data:/var/lib/postgresql/data/
     environment:
-      - MYSQL_ROOT_PASSWORD=qwer1234#
-      - MYSQL_DATABASE=light_admin
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=qwer1234#
+      - POSTGRES_DB=light_admin
     networks:
       - db_network
   nginx:

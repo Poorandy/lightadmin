@@ -89,13 +89,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'light_admin',
         'USER': 'root',
         'PASSWORD': 'qwer1234#',
         'HOST': 'db',
-        'PORT': '3306',
-        'OPTIONS': {'charset': 'utf8mb4'},
+        'PORT': '5432'
     }
 }
 

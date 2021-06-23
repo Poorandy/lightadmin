@@ -1,6 +1,6 @@
 -i https://pypi.douban.com/simple
 asgiref
-mysqlclient
+psycopg2
 autopep8
 django==3.2
 pycodestyle
