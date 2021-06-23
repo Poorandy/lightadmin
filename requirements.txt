@@ -14,3 +14,4 @@ djangorestframework
 django-simpleui
 django-import_export
 Pillow
+psycopg2
