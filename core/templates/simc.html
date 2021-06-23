@@ -83,13 +83,13 @@
             </div>
         </div>
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">战斗记录</a>
+            <li role="presentation" class="nav-item"><a href="#home" class="active nav-link" aria-selected="true" aria-controls="home" role="tab" data-toggle="tab">战斗记录</a>
             </li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">伤害占比</a>
+            <li role="presentation" class="nav-item"><a href="#profile" class="nav-link" aria-controls="profile" role="tab" aria-selected="false" data-toggle="tab">伤害占比</a>
             </li>
         </ul>
         <div class="tab-content my_tab" style="overflow: auto;">
-            <div role="tabpanel" class="tab-pane active" id="home"></div>
+            <div role="tabpanel" class="tab-pane show active" id="home"></div>
             <div role="tabpanel" class="tab-pane" id="profile"></div>
         </div>
     </div>
@@ -97,23 +97,26 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">编辑数据</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">编辑数据</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group" style="margin-bottom:10px;">
-                        <span class="input-group-addon" id="basic-addon1">血量</span>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="blood" class="col-form-label">血量</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">血量</span> -->
                         <input type="text" class="form-control" id="blood" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group" style="margin-bottom:10px;">
-                        <span class="input-group-addon" id="basic-addon1">同步值</span>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="attack" class="col-form-label">同步值</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">同步值</span> -->
                         <input type="text" class="form-control" id="attack" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">效果</span>
+                    <div class="form-group">
+                        <label for="effect" class="col-form-label">效果</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">效果</span> -->
                         <input type="text" class="form-control" id="effect" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
@@ -129,18 +132,20 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">卡片编辑</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">卡片编辑</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group" style="margin-bottom:10px;">
-                        <span class="input-group-addon" id="basic-addon1">费用</span>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="power" class="col-form-label">费用</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">费用</span> -->
                         <input type="text" class="form-control" id="power" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">效果</span>
+                    <div class="form-group">
+                        <label for="card_effect" class="col-form-label">效果</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">效果</span> -->
                         <input type="text" class="form-control" id="card_effect" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
@@ -156,23 +161,26 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">新建战斗</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">新建战斗</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group" style="margin-bottom:10px;">
-                        <span class="input-group-addon" id="basic-addon1">名称</span>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="fightname" class="col-form-label">名称</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">名称</span> -->
                         <input type="text" class="form-control" id="fightname" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group" style="margin-bottom:10px;">
-                        <span class="input-group-addon" id="basic-addon1">模拟次数</span>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="loop" class="col-form-label">模拟次数</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">模拟次数</span> -->
                         <input type="text" class="form-control" id="loop" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
-                    <div class="input-group" style="margin-bottom:10px;">
-                        <span class="input-group-addon" id="basic-addon1">战斗描述</span>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label for="summary" class="col-form-label">战斗描述</label>
+                        <!-- <span class="input-group-addon" id="basic-addon1">战斗描述</span> -->
                         <input type="text" class="form-control" id="summary" placeholder=""
                                aria-describedby="basic-addon1">
                     </div>
