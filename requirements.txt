@@ -1,5 +1,6 @@
 -i https://pypi.douban.com/simple
 asgiref
+mysqlclient
 autopep8
 django==3.2
 pycodestyle
@@ -14,4 +15,3 @@ djangorestframework
 django-simpleui
 django-import_export
 Pillow
-pymysql
