@@ -19,6 +19,7 @@ services:
     image: mysql:5.7
     volumes:
       - "./mysql:/var/lib/mysql"
+      - "./custom.conf:/etc/mysql/conf.d/custom.conf"
     ports:
       - "3306:3306"
     restart: always
