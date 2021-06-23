@@ -22,7 +22,7 @@ services:
     ports:
       - "3306:3306"
     restart: always
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--skip-character-set-client-handshake','--default-time-zone=+8:00']
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--skip-character-set-client-handshake','--default-time-zone=+8:00']
     environment:
       - MYSQL_ROOT_PASSWORD=qwer1234#
       - MYSQL_DATABASE=light_admin
