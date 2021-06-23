@@ -24,7 +24,7 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=qwer1234#
+      - POSTGRES_PASSWORD=qwer!1234
       - POSTGRES_DB=light_admin
     networks:
       - db_network

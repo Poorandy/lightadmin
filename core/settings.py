@@ -6,20 +6,19 @@ Copyright (c) 2019 - present AppSeed.us
 import os
 from decouple import config
 from unipath import Path
-import dj_database_url
+from dj_database_url import parse as db_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from pathlib import Path
 import os
 import sys
+
 # 设置apps路径
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_1122')
-
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', default=True, cast=bool)
 DEBUG = False
@@ -92,12 +91,20 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'light_admin',
         'USER': 'root',
-        'PASSWORD': 'qwer1234#',
+        'PASSWORD': 'qwer!1234',
         'HOST': 'db',
         'PORT': '5432'
     }
 }
+DATABASES = {
+    'default': config(
+        'DATABASE_URL',
+        default='sqlite:///' + 'db.sqlite3',
+        cast=db_url
+    )
+}
 
+print(DATABASES)
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -156,7 +163,7 @@ XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
 SIMPLEUI_CONFIG = {
     'system_keep': False,
     'dynamic': True,
-    'menus': [ {
+    'menus': [{
         'app': 'auth',
         'name': 'AUTH',
         'icon': 'fas fa-user-shield',
