@@ -34,6 +34,10 @@ services:
     expose:
       - "25678"
     restart: always
+    volumes:
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/:/data/
+      - ./log/redis/:/var/log/redis/
     command: --requirepass PASSWORD
     networks:
       - db_network
