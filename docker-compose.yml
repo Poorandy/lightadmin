@@ -38,8 +38,11 @@ services:
     networks:
       - db_network
   celery:
+    build: .
+    volumes:
+      - .:/code
     restart: always
-    command: celery  worker -A web -l info
+    command: celery  worker -A core -l info
     depends_on:
       - db
       - redis
