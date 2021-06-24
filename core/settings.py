@@ -35,11 +35,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',  # Enable the inner app
+    'rest_framework'
+]
+
+INSTALLED_APPS += [
+    'apps.app',  # Enable the inner app
     'apps.simc',
     'apps.core',
     'apps.plat',
-    'rest_framework'
+    'django_celery_beat',
+    'django_celery_results'
 ]
 
 MIDDLEWARE = [
@@ -86,7 +91,16 @@ DATABASES = {
         cast=db_url
     )
 }
-print(DATABASES)
+
+# celery
+CELERY_BROKER_URL = config('REDIS_URL', default='redis://127.0.0.1:6379/0')
+CELERY_RESULT_BACKEND = "django-db"
+# 设置时间参照，不设置默认使用的UTC时间
+CELERY_TIMEZONE = 'Asia/Shanghai'
+# 指定任务的序列化
+CELERY_TASK_SERIALIZER = 'json'
+# 指定执行结果的序列化
+CELERY_RESULT_SERIALIZER = 'json'
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

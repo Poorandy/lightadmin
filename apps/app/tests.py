@@ -11,5 +11,4 @@ class ModelsTest(TestCase):
     def test_001(self):
         task = add.delay(1, 2)
 
-
 # Create your tests here.

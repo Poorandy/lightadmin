@@ -15,3 +15,8 @@ djangorestframework
 django-simpleui
 django-import_export
 Pillow
+redis
+celery==4.4.7
+flower
+django-celery-beat
+django-celery-results

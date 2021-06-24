@@ -12,6 +12,7 @@ services:
       - "8000"
     depends_on:
       - db
+      - redis
     networks:
       - web_network
       - db_network
@@ -28,6 +29,31 @@ services:
       - POSTGRES_DB=yourdb
     networks:
       - db_network
+  redis:
+    image: redis:alpine
+    expose:
+      - "25678"
+    restart: always
+    networks:
+      - db_network
+  celery:
+    restart: always
+    command: celery  worker -A web -l info
+    depends_on:
+      - db
+      - redis
+    networks:
+      - db_network
+      - web_network
+  flower:
+    build: .
+    image: mher/flower
+    command: flower -A core --port=5555 --basic_auth=user1:password1,user2:password2
+    ports:
+      - "5544:5555"
+    depends_on:
+      - redis
+      - db
   nginx:
     restart: always
     image: nginx:latest
