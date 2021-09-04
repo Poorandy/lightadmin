@@ -20,7 +20,7 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_1122')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # load production server from .env
 ALLOWED_HOSTS = ['*']
@@ -141,13 +141,13 @@ MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(CORE_DIR, 'core/static'),
-)
+STATIC_URL = '/static/'
+if DEBUG:
+    STATICFILES_DIRS = [str(BASE_DIR / 'static'), ]
+else:
+    STATIC_ROOT = str(BASE_DIR / 'static')
+
 #############################################################
 #############################################################
 
@@ -160,6 +160,10 @@ SIMPLEUI_CONFIG = {
     'system_keep': False,
     'dynamic': True,
     'menus': [{
+        'name': 'QUICK SIM',
+        'icon': 'fab fa-simplybuilt',
+        'url': '/static/frontend/index.html'
+    }, {
         'app': 'auth',
         'name': 'AUTH',
         'icon': 'fas fa-user-shield',
@@ -193,6 +197,14 @@ SIMPLEUI_CONFIG = {
             'name': 'DUNGEON',
             'icon': 'fas fa-dungeon',
             'url': 'simc/battlefield'
+        }, {
+            'name': 'AURA',
+            'icon': 'fas fa-sun',
+            'url': 'simc/aura'
+        },{
+            'name': 'ARMOR&ARMS',
+            'icon': 'fas fa-shield-alt',
+            'url': 'simc/armorarms'
         }]
 
     }]
@@ -200,4 +212,4 @@ SIMPLEUI_CONFIG = {
 
 SIMPLEUI_HOME_INFO = False
 
-SIMPLEUI_LOGO = 'https://miro.com/api/v1/accounts/3074457358670303205/picture?etag=R3074457346012449852_1&size=140'
+# SIMPLEUI_LOGO = 'https://miro.com/api/v1/accounts/3074457358670303205/picture?etag=R3074457346012449852_1&size=140'

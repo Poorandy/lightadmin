@@ -18,7 +18,9 @@ class Monster(models.Model):
     name = models.CharField(verbose_name="单位名", max_length=50)
     summary = models.TextField(verbose_name="单位描述")
     health = models.IntegerField(verbose_name="血量")
-    sync = models.IntegerField(verbose_name="同步值")
+    sync = models.IntegerField(verbose_name="体力")
+    attack = models.IntegerField(verbose_name="攻击力")
+    defend = models.IntegerField(verbose_name="防御力")
     img = models.ImageField(
         verbose_name='封面', upload_to='img/monster/%Y/%m/%d/', null=True, blank=True)
     # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
@@ -104,7 +106,9 @@ class Character(models.Model):
     name = models.CharField(verbose_name="角色名", max_length=30)
     summary = models.TextField(verbose_name="角色描述")
     health = models.IntegerField(verbose_name="血量")
-    sync = models.IntegerField(verbose_name="同步值")
+    sync = models.IntegerField(verbose_name="体力")
+    attack = models.IntegerField(verbose_name="攻击力")
+    defend = models.IntegerField(verbose_name="防御力")
     img = models.ImageField(
         verbose_name='封面', upload_to='img/character/%Y/%m/%d/', null=True, blank=True)
     # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
@@ -121,3 +125,52 @@ class Character(models.Model):
 
     class Meta:
         verbose_name = "角色"
+
+
+class Aura(models.Model):
+    id = models.UUIDField(
+        verbose_name='ID', default=uuid.uuid4, primary_key=True)
+
+    name = models.CharField(verbose_name="BUFF名称", max_length=30)
+    summary = models.TextField(verbose_name="BUFF描述")
+    img = models.ImageField(
+        verbose_name='封面', upload_to='img/buffs/%Y/%m/%d/', null=True, blank=True)
+    # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
+    behavior = models.TextField(verbose_name="单位行为")
+    behavior_script = models.TextField(
+        verbose_name="单位行为代码", null=True, blank=True)
+    editor = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="编辑人", null=True, blank=True, default=None)
+    update_time = models.DateTimeField(
+        verbose_name="更新时间", auto_now=True)
+    create_time = models.DateTimeField(
+        verbose_name="创建时间", default=timezone.now)
+    delete_flag = models.SmallIntegerField(verbose_name="删除标记", default=0)
+
+    class Meta:
+        verbose_name = "光环"
+
+
+class ArmorArms(models.Model):
+    id = models.UUIDField(
+        verbose_name='ID', default=uuid.uuid4, primary_key=True)
+
+    name = models.CharField(verbose_name="装备名称", max_length=30)
+    summary = models.TextField(verbose_name="装备描述")
+    img = models.ImageField(
+        verbose_name='封面', upload_to='img/armor/%Y/%m/%d/', null=True, blank=True)
+    # "@absDamage(5)|@consDamage(2,4)|absHeal(5)"
+    slot = models.IntegerField(verbose_name="装备槽位")
+    behavior = models.TextField(verbose_name="单位行为")
+    behavior_script = models.TextField(
+        verbose_name="单位行为代码", null=True, blank=True)
+    editor = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="编辑人", null=True, blank=True, default=None)
+    update_time = models.DateTimeField(
+        verbose_name="更新时间", auto_now=True)
+    create_time = models.DateTimeField(
+        verbose_name="创建时间", default=timezone.now)
+    delete_flag = models.SmallIntegerField(verbose_name="删除标记", default=0)
+
+    class Meta:
+        verbose_name = "装备"

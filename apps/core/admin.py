@@ -8,7 +8,7 @@ from import_export.admin import ImportExportActionModelAdmin, ExportActionModelA
 from simpleui.admin import AjaxAdmin
 # from rest_framework.authtoken.admin import TokenAdmin
 
-from apps.simc.models import Monster, Card, Character, BattleField
+from apps.simc.models import Monster, Card, Character, BattleField, Aura, ArmorArms
 
 
 # Register your models here.
@@ -29,7 +29,7 @@ class MonsterAdmin(ExportActionModelAdmin, AjaxAdmin):
     search_fields = ('name', 'unit_flag',)
     list_filter = ('name',)
     date_hierarchy = 'update_time'
-    list_display = ('id', 'name',
+    list_display = ('id', 'name', 'behavior',
                     'behavior_script', 'health', 'sync', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
@@ -79,7 +79,7 @@ class CardAdmin(ExportActionModelAdmin, AjaxAdmin):
     search_fields = ('name', 'type',)
     list_filter = ('name',)
     date_hierarchy = 'update_time'
-    list_display = ('id', 'name',
+    list_display = ('id', 'name', 'behavior',
                     'behavior_script', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
@@ -129,7 +129,7 @@ class CharacterAdmin(ExportActionModelAdmin, AjaxAdmin):
     search_fields = ('name',)
     list_filter = ('name',)
     date_hierarchy = 'update_time'
-    list_display = ('id', 'name',
+    list_display = ('id', 'name', 'behavior',
                     'behavior_script', 'health', 'sync', 'editor', 'update_time')
     ordering = ['name']
     list_per_page = 100
@@ -190,3 +190,97 @@ class BattleFieldAdmin(ExportActionModelAdmin, AjaxAdmin):
 
     def message_success(self, request, queryset, context):
         messages.add_message(request, messages.SUCCESS, context)
+
+
+# 光环admin
+class AuraResource(resources.ModelResource):
+    class Meta:
+        exclude = ('id',)
+        model = Aura
+
+
+@admin.register(Aura)
+class AuraAdmin(ExportActionModelAdmin, AjaxAdmin):
+    resource_class = CardResource
+    search_fields = ('name',)
+    list_filter = ('name',)
+    date_hierarchy = 'update_time'
+    list_display = ('id', 'name', 'behavior',
+                    'behavior_script', 'editor', 'update_time')
+    ordering = ['name']
+    list_per_page = 100
+
+    def message_success(self, request, queryset, context):
+        messages.add_message(request, messages.SUCCESS, context)
+
+    def make_copy(self, request, queryset):
+        post = request.POST
+        if not post.get('_selected_action'):
+            return JsonResponse(data={
+                'status': 'error',
+                'msg': '请先选中数据! '
+            })
+        else:
+            querysetlist = list()
+            for i in post.getlist('_selected_action'):
+                random = '__' + str(datetime.now())
+                card = Card.objects.get(id=i)
+                card.name += random
+                card.id = uuid.uuid4()
+                querysetlist.append(card)
+            Card.objects.bulk_create(querysetlist)
+
+            self.message_success(request, queryset, context='复制成功！')
+        pass
+
+    make_copy.short_description = '复制'
+    make_copy.icon = 'fas fa-paste'
+    make_copy.style = 'background:orange;color:white'
+    make_copy.confirm = '是否确认复制一份？'
+
+
+# 装备admin
+class ArmorArmsResource(resources.ModelResource):
+    class Meta:
+        exclude = ('id',)
+        model = ArmorArms
+
+
+@admin.register(ArmorArms)
+class ArmorArmsAdmin(ExportActionModelAdmin, AjaxAdmin):
+    resource_class = CardResource
+    search_fields = ('name',)
+    list_filter = ('name',)
+    date_hierarchy = 'update_time'
+    list_display = ('id', 'name', 'behavior',
+                    'behavior_script', 'editor', 'update_time')
+    ordering = ['name']
+    list_per_page = 100
+
+    def message_success(self, request, queryset, context):
+        messages.add_message(request, messages.SUCCESS, context)
+
+    def make_copy(self, request, queryset):
+        post = request.POST
+        if not post.get('_selected_action'):
+            return JsonResponse(data={
+                'status': 'error',
+                'msg': '请先选中数据! '
+            })
+        else:
+            querysetlist = list()
+            for i in post.getlist('_selected_action'):
+                random = '__' + str(datetime.now())
+                card = Card.objects.get(id=i)
+                card.name += random
+                card.id = uuid.uuid4()
+                querysetlist.append(card)
+            Card.objects.bulk_create(querysetlist)
+
+            self.message_success(request, queryset, context='复制成功！')
+        pass
+
+    make_copy.short_description = '复制'
+    make_copy.icon = 'fas fa-paste'
+    make_copy.style = 'background:orange;color:white'
+    make_copy.confirm = '是否确认复制一份？'
