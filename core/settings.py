@@ -160,10 +160,6 @@ SIMPLEUI_CONFIG = {
     'system_keep': False,
     'dynamic': True,
     'menus': [{
-        'name': 'QUICK SIM',
-        'icon': 'fab fa-simplybuilt',
-        'url': '/static/frontend/index.html'
-    }, {
         'app': 'auth',
         'name': 'AUTH',
         'icon': 'fas fa-user-shield',
