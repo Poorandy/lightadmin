@@ -4,7 +4,7 @@ services:
   app:
     restart: always
     build: .
-    command: bash -c "python3 manage.py collectstatic --no-input && python3 manage.py migrate && gunicorn --timeout=30 --workers=4 --bind :8000 core.wsgi:application"
+    command: bash -c "python3 manage.py collectstatic --no-input && python3 manage.py makemigrations && python3 manage.py migrate && gunicorn --timeout=30 --workers=4 --bind :8000 core.wsgi:application"
     volumes:
       - .:/code
       - static-volume:/code/staticfiles/
