@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<TITLE></TITLE>
+	<noscript><meta http-equiv="refresh" content="0;url=noscript.php"></noscript>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<META NAME="Generator" CONTENT="EditPlus">
+	<META NAME="Author" CONTENT="">
+	<META NAME="Keywords" CONTENT="">
+	<META NAME="Description" CONTENT="">
+	<link rel="stylesheet" href="js/swiper.min.css">
+	<link rel="stylesheet" href="js/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/swiper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</HEAD>
+<BODY>
+<div class="head_box"></div>
+<div class="main_box">
+	<div class="post_line">
+		<div class="post_btn" id="resultBtn">模拟运行</div>
+		<div class="post_btn" id="resetBtn" style="margin-right: 30px;">重置</div>
+	</div>
+	<div class="post_line" style="margin: 0;height: 30px;">
+		<div class="title_btn" style="float: left;">角色</div>
+		<div class="title_btn" style="float: right;">怪物</div>
+		<!-- <div class="title_btn" style="margin: 0 auto;"></div> -->
+	</div>
+	<div class="left_box swiper-container">
+		<div class="swiper-wrapper">
+			<div class="card_btn swiper-slide">
+				<div class="card_name"></div>
+				<div class="card_blood"></div>
+				<div class="card_attack"></div>
+				<div class="card_effect"></div>
+			</div>
+			<div class="card_btn swiper-slide"></div>
+			<div class="card_btn swiper-slide"></div>
+			<div class="card_btn swiper-slide"></div>
+			<div class="card_btn swiper-slide"></div>
+		</div>
+	</div>
+	<div class="right_box swiper-container">
+		<div class="swiper-wrapper">
+			<div class="card_btn swiper-slide"></div>
+			<div class="card_btn swiper-slide"></div>
+			<div class="card_btn swiper-slide"></div>
+			<div class="card_btn swiper-slide"></div>
+			<div class="card_btn swiper-slide"></div>
+		</div>
+	</div>
+	<div class="mid_box">
+		<div class="mid_left swiper-container">
+			<div class="swiper-wrapper">
+				<!-- <div class="item_sld swiper-slide" data-num="0" data-id="1" data-blood="100" data-attack="50" >
+					<div class="item_name">盖伦</div>
+					<div class="item_line item_blood">血量：100</div>
+					<div class="item_line item_attack">同步值：50</div>
+					<div class="item_del" aria-hidden="true">x</div>
+				</div> -->
+			</div>
+		</div>
+		<div class="mid_right swiper-container">
+			<div class="swiper-wrapper"></div>
+		</div>
+		<div class="mid_bottom swiper-container">
+			<div class="swiper-wrapper">
+			</div>
+		</div>
+	</div>
+	<input type="hidden" value="" id="mode_id">
+	<input type="hidden" value="" id="mode_type">
+	<div class="title_btn" style="margin: 20px auto;">卡片</div>
+	<div class="btm_box swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide card_item">
+				<div class="item_name"></div>
+				<div class="item_power"></div>
+				<div class="item_effect"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="list_main">
+	<div class="fightlist swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide fitem"></div>
+		</div>
+	</div>
+	<ul class="nav nav-tabs" id="myTabs" role="tablist">
+		<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">战斗记录</a></li>
+		<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">伤害占比</a></li>
+	</ul>
+	<div class="tab-content my_tab" style="overflow: auto;">
+		<div role="tabpanel" class="tab-pane active" id="home"></div>
+		<div role="tabpanel" class="tab-pane" id="profile"></div>
+	</div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">编辑数据</h4>
+		</div>
+		<div class="modal-body">
+			<div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">血量</span>
+				<input type="text" class="form-control" id="blood" placeholder="" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">同步值</span>
+				<input type="text" class="form-control" id="attack" placeholder="" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">效果</span>
+				<input type="text" class="form-control" id="effect" placeholder="" aria-describedby="basic-addon1">
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" id="save_btn">Save changes</button>
+		</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">卡片编辑</h4>
+		</div>
+		<div class="modal-body">
+			<div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">费用</span>
+				<input type="text" class="form-control" id="power" placeholder="" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">效果</span>
+				<input type="text" class="form-control" id="card_effect" placeholder="" aria-describedby="basic-addon1">
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" id="card_save">Save changes</button>
+		</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">新建战斗</h4>
+		</div>
+		<div class="modal-body">
+			<div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">名称</span>
+				<input type="text" class="form-control" id="fightname" placeholder="" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">模拟次数</span>
+				<input type="text" class="form-control" id="loop" placeholder="" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">战斗描述</span>
+				<input type="text" class="form-control" id="summary" placeholder="" aria-describedby="basic-addon1">
+			</div>
+			<!-- <div class="input-group" style="margin-bottom:10px;">
+				<span class="input-group-addon" id="basic-addon1">编辑人</span>
+				<input type="text" class="form-control" id="editor" placeholder="" aria-describedby="basic-addon1">
+			</div> -->
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" id="fight_save">Save changes</button>
+		</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+</BODY>
+<script>
+var num=0;
+$(document).ready(function() {
+	var mySwiper1 = new Swiper('.left_box',{
+		direction: 'vertical',
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	var mySwiper2 = new Swiper('.right_box',{
+		direction: 'vertical',
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	var mySwiper3 = new Swiper('.mid_left',{
+		direction: 'vertical',
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	var mySwiper4 = new Swiper('.mid_right',{
+		direction: 'vertical',
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	var mySwiper7 = new Swiper('.fightlist',{
+		direction: 'vertical',
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	var mySwiper5 = new Swiper('.mid_bottom',{
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	var mySwiper6 = new Swiper('.btm_box',{
+		slidesPerView: 'auto',
+		freeMode: true,
+		observer: true,//修改swiper自己或子元素时，自动初始化swiper
+		observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	});
+	$("#fightname").change(function(){
+		checkName($(this).val())
+	});
+	$(".mid_left").on('click','.item_del',function(e){
+		$(this).parent().remove();
+		e.stopPropagation();
+	});
+	$(".mid_right").on('click','.item_del',function(e){
+		$(this).parent().remove();
+		e.stopPropagation();
+	});
+	$(".mid_bottom").on('click','.item_del',function(e){
+		$(this).parent().remove();
+		e.stopPropagation();
+	});
+	$('#myTabs a').click(function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+	})
+	$(".left_box").on('click','.card_btn',function(){
+		var id=$(this).data('id');
+		if($(".mid_left .item_sld").length>0){
+			alert('角色已存在,请先删除')
+		}else{
+			var attack=$(this).data('attack');
+			var blood=$(this).data('blood');
+			var effect=$(this).data('effect');
+			num++;
+			var list='<div class="item_sld swiper-slide" data-num="'+num+'" data-id="'+id+'" data-blood="'+blood+'" data-attack="'+attack+'" data-effect="'+effect+'">'+
+						'<div class="item_name">'+$(this).find('.card_name').html()+'</div>'+
+						'<div class="item_line item_blood">血量：'+blood+'</div>'+
+						'<div class="item_line item_attack">同步值：'+attack+'</div>'+
+						'<div class="item_del" aria-hidden="true">x</div>'+
+					'</div>'
+			$(".mid_left .swiper-wrapper").append(list)
+		}
+	});
+	$(".right_box").on('click','.card_btn',function(){
+		var id=$(this).data('id');
+		if($(".mid_right .item_sld").length>4){
+			alert('怪物最多放5个')
+		}else{
+			var attack=$(this).data('attack');
+			var blood=$(this).data('blood');
+			var effect=$(this).data('effect');
+			num++;
+			var list='<div class="item_sld swiper-slide" data-num="'+num+'" data-id="'+id+'" data-blood="'+blood+'" data-attack="'+attack+'" data-effect="'+effect+'">'+
+						'<div class="item_name">'+$(this).find('.card_name').html()+'</div>'+
+						'<div class="item_line item_blood">血量：'+blood+'</div>'+
+						'<div class="item_line item_attack">同步值：'+attack+'</div>'+
+						'<div class="item_del" aria-hidden="true">x</div>'+
+					'</div>'
+			$(".mid_right .swiper-wrapper").append(list)
+		}
+	});
+	$(".btm_box").on('click','.card_item',function(){
+		var id=$(this).data('id');
+		var effect=$(this).data('effect');
+		var power=$(this).data('power');
+		num++;
+		var list='<div class="card_sld swiper-slide" data-num="'+num+'" data-id="'+id+'" data-power="'+power+'" data-effect="'+effect+'">'+
+					'<div class="card_name">'+$(this).find('.item_name').html()+'</div>'+
+					'<div class="card_power">费用：'+power+'</div>'+
+					'<div class="item_del" aria-hidden="true">x</div>'+
+				'</div>'
+		$(".mid_bottom .swiper-wrapper").append(list)
+	});
+	$(".mid_left").on('click','.item_sld',function(){
+		var id=$(this).data('num');
+		var blood=$(this).data('blood');
+		var attack=$(this).data('attack');
+		var effect=$(this).data('effect');
+		$("#mode_id").val(id);
+		$("#mode_type").val(1);
+		$("#blood").val(blood);
+		$("#attack").val(attack);
+		$("#effect").val(effect);
+		$('#myModal').modal()
+	});
+	$(".mid_right").on('click','.item_sld',function(){
+		var id=$(this).data('num');
+		var blood=$(this).data('blood');
+		var attack=$(this).data('attack');
+		var effect=$(this).data('effect');
+		$("#mode_id").val(id);
+		$("#mode_type").val(2);
+		$("#blood").val(blood);
+		$("#attack").val(attack);
+		$("#effect").val(effect);
+		$('#myModal').modal()
+	});
+	$(".mid_bottom").on('click','.card_sld',function(){
+		var id=$(this).data('num');
+		var power=$(this).data('power');
+		var effect=$(this).data('effect');
+		$("#mode_id").val(id);
+		$("#mode_type").val(3);
+		$("#power").val(power);
+		$("#card_effect").val(effect);
+		$('#myModal2').modal()
+	});
+	$(".fightlist").on('click','.fitem',function(){
+		var id=$(this).data('id');
+		var cont=localStorage.getItem('fight');
+		if(cont){
+			cont=JSON.parse(cont);
+			$("#home").html(cont[id].fields.combat_log.replaceAll('\n','<br>'));
+		}
+	});
+	$("#card_save").on('click',function(){
+		var id=$("#mode_id").val();
+		var power=$("#power").val();
+		var effect=$("#card_effect").val();
+		$(".mid_bottom .card_sld[data-num="+id+"]").find('.card_power').html('费用：'+power);
+		$(".mid_bottom .card_sld[data-num="+id+"]").data('power',power);
+		$(".mid_bottom .card_sld[data-num="+id+"]").data('effect',effect);
+		$('#myModal2').modal('hide');
+	});
+	$("#save_btn").on('click',function(){
+		var id=$("#mode_id").val();
+		var type=$("#mode_type").val();
+		var blood=$("#blood").val();
+		var attack=$("#attack").val();
+		var effect=$("#effect").val();
+		if(type==1){
+			$(".mid_left .item_sld[data-num="+id+"]").find('.item_blood').html('血量：'+blood);
+			$(".mid_left .item_sld[data-num="+id+"]").find('.item_attack').html('同步值：'+attack);
+			$(".mid_left .item_sld[data-num="+id+"]").data('blood',blood);
+			$(".mid_left .item_sld[data-num="+id+"]").data('attack',attack);
+			$(".mid_left .item_sld[data-num="+id+"]").data('effect',effect);
+		}else if(type==2){
+			$(".mid_right .item_sld[data-num="+id+"]").find('.item_blood').html('血量：'+blood);
+			$(".mid_right .item_sld[data-num="+id+"]").find('.item_attack').html('同步值：'+attack);
+			$(".mid_right .item_sld[data-num="+id+"]").data('blood',blood);
+			$(".mid_right .item_sld[data-num="+id+"]").data('attack',attack);
+			$(".mid_right .item_sld[data-num="+id+"]").data('effect',effect);
+		}else{
+
+		}
+		$('#myModal').modal('hide');
+	});
+	$("#resultBtn").on('click',function(){
+		$('#myModal3').modal()
+	});
+	$("#fight_save").on('click',function(){
+		var pdata={
+			name:$('#fightname').val(),
+			loop:$('#loop').val()?$('#loop').val():100,
+			summary:$('#summary').val(),
+			// editor:$('#editor').val(),
+			monsters:'',
+			character:'',
+			cards:'',
+		}
+		var charact='';
+		var monster=[];
+		var cards=[];
+		$('.mid_left .item_sld').each(function(){
+			charact={
+				id:$(this).data('num'),
+				unit_id:$(this).data('id'),
+				name:$(this).find('.item_name').html(),
+				behavior_script:$(this).data('effect'),
+				enemy:'False',
+				max_health:$(this).data('blood'),
+				max_sync:$(this).data('attack'),
+				max_power:5,
+			}
+		});
+		$('.mid_right .item_sld').each(function(){
+			monster.push({
+				id:$(this).data('num'),
+				name:$(this).find('.item_name').html(),
+				behavior_script:$(this).data('effect'),
+				unit_id:$(this).data('id'),
+				enemy:'Ture',
+				max_health:$(this).data('blood'),
+				max_sync:$(this).data('attack'),
+				max_power:5,
+			})
+		});
+		$('.mid_bottom .card_sld').each(function(){
+			cards.push({
+				id:$(this).data('num'),
+				card_id:$(this).data('id'),
+				name:$(this).find('.card_name').html(),
+				behavior_script:$(this).data('effect'),
+				power:$(this).data('power'),
+				type:$(this).data('type'),
+			})
+		});
+		if(charact&&monster.length>0&&cards.length>0){
+			pdata.monsters=monster;
+			pdata.character=charact;
+			pdata.cards=cards;
+			pdata=JSON.stringify(pdata);
+			console.log(pdata)
+			postFight(pdata);
+			$('#myModal3').modal('hide')
+		}else{
+			alert('请加入内容')
+		}
+		
+	});
+	$("#resetBtn").on('click',function(){
+		$('.mid_left .swiper-wrapper').html('');
+		$('.mid_bottom .swiper-wrapper').html('');
+		$('.mid_right .swiper-wrapper').html('');
+	});
+	getCharacter();
+	getMonster();
+	getCards();
+	getOldF();
+});
+function getCharacter(){
+	$.get('http://furioso.fun/api/character/',function(data){
+		if(data.code=='200'&&data.total>0){
+			var contArr=data.data;
+			var list='';
+			for (var index = 0; index < contArr.length; index++) {
+				list+='<div class="card_btn swiper-slide" data-id="'+contArr[index].pk+'" data-effect="'+contArr[index].fields.behavior_script+'" data-blood="'+contArr[index].fields.health+'" data-attack="'+contArr[index].fields.sync+'">'+
+						'<div class="card_name">'+contArr[index].fields.name+'</div>'+
+						'<div class="card_blood">血量：'+contArr[index].fields.health+'</div>'+
+						'<div class="card_attack">同步值：'+contArr[index].fields.sync+'</div>'+
+						'<div class="card_effect">效果：'+contArr[index].fields.behavior+'</div>'+
+					'</div>';
+			}
+			$('.left_box .swiper-wrapper').html(list)
+		}
+	},'json');
+}
+function getMonster(){
+	$.get('http://furioso.fun/api/monster/',function(data){
+		if(data.code=='200'&&data.total>0){
+			var contArr=data.data;
+			var list='';
+			for (var index = 0; index < contArr.length; index++) {
+				list+='<div class="card_btn swiper-slide" data-id="'+contArr[index].pk+'" data-effect="'+contArr[index].fields.behavior_script+'" data-blood="'+contArr[index].fields.health+'" data-attack="'+contArr[index].fields.sync+'">'+
+						'<div class="card_name">'+contArr[index].fields.name+'</div>'+
+						'<div class="card_blood">血量：'+contArr[index].fields.health+'</div>'+
+						'<div class="card_attack">同步值：'+contArr[index].fields.sync+'</div>'+
+						'<div class="card_effect">效果：'+contArr[index].fields.behavior+'</div>'+
+					'</div>';
+			}
+			$('.right_box .swiper-wrapper').html(list)
+		}
+	},'json');
+}
+function getCards(){
+	$.get('http://furioso.fun/api/card/',function(data){
+		if(data.code=='200'&&data.total>0){
+			var contArr=data.data;
+			var list='';
+			for (var index = 0; index < contArr.length; index++) {
+				list+='<div class="swiper-slide card_item" data-type="'+contArr[index].fields.type+'" data-id="'+contArr[index].pk+'" data-effect="'+contArr[index].fields.behavior_script+'" data-power="'+contArr[index].fields.power+'">'+
+						'<div class="item_name">'+contArr[index].fields.name+'</div>'+
+						'<div class="item_power">费用：'+contArr[index].fields.power+'</div>'+
+						'<div class="item_effect">效果：'+contArr[index].fields.summary+'</div>'+
+					'</div>';
+			}
+			$('.btm_box .swiper-wrapper').html(list)
+		}
+	},'json');
+}
+function postFight(jsondata){
+	$.post('http://furioso.fun/api/battle/',jsondata,function(data){
+		if(data.code==200&&data.total>0){
+			var cont=data.data;
+			$("#home").html(cont.replaceAll('\n','<br>'));
+		}
+	},'json');
+}
+function getOldF(){
+	$.get('http://furioso.fun/api/combat/',function(data){
+		if(data.code=='200'&&data.total>0){
+			var contArr=data.data;
+			var list=''
+			for (var index = 0; index < contArr.length; index++) {
+				list += '<div class="swiper-slide fitem" data-id="'+index+'">'+contArr[index].pk+'</div>';
+			}
+			$(".fightlist .swiper-wrapper").html(list);
+			localStorage.setItem('fight',JSON.stringify(contArr));
+		}
+	},'json');
+}
+function checkName(name){
+	$.get('http://furioso.fun/api/combat_check/',{name:name},function(data){
+		if(data.code=='200'){
+			if(data.data==true){
+				alert('该战斗已存在，继续提交将覆盖原有数据')
+			}
+		}
+	},'json');
+}
+</script>
+</HTML>
